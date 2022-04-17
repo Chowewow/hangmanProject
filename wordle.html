@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
     <link rel="stylesheet" href="wordle.css" />
-    </head>
-    <body>
-        <p> Our project </p>
-    </body>
-    
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.7.1.min.js"
+    ></script>
+    <script src="wordle.js"></script>
+  </head>
+
+  <body style="text-align: center">
+    <p id="demo">Our project</p>
+    <caption>
+      Enter two 5 letter words
+    </caption>
+    <input type="text" id="target" />
+    <input type="text" id="guess" />
+    <button id="btn" onclick="wordleLab(document.getElementById('target').value, document.getElementById('guess').value)">submit</button>
+  </body>
+
+  <script></script>
 </html>
