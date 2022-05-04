@@ -1,5 +1,22 @@
-p {
-    color: black;
-    text-align: center;
-    font-size: large;
+.slides {
+  background-color: burlywood;
+  height: 100vh;
+  text-align: center;
+}
+.play {
+  background-color: black;
+  height: 100vh;
+  text-align: center;
+}
+
+.overlay {
+  z-index: 9;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  background-color:red;
+  border-radius: 10px;
+  text-align: center;
 }
