@@ -10,7 +10,7 @@
 }
 
 .overlay {
-  z-index: 9;
+  z-index: 1;
   top: 25%;
   left: 25%;
   width: 50%;
