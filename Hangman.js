@@ -10,30 +10,41 @@ $(document).ready(function () {
   });
 });
 
-//currently only works with capitalized letters
+//currently only works with capitalized letters, temporay answer of "HANGMAN"
 let answer = "HANGMAN";
 let guesses = 0;
 let mistakes = 0;
 let guessedLetters = [];
-const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+let correctGuesses = 0;
 
-//initiates blankspot for answer
-function blanks(answer) {
+//outputs blank spaces or correctly guessed letters in position
+function output() {
   let format = "";
+  correctGuesses = 0;
   for (let i = 0; i < answer.length; i++) {
-    format += "_ ";
+    if (guessedLetters.includes(answer.charAt(i))){
+      format += answer.charAt(i);
+      correctGuesses++
+    }
+    else {format += "_";}
+    if (i < answer.length - 1) {
+      format += " ";
+    }
+    if (correctGuesses == answer.length) {
+      alert("you win!")
+    }
   }
   document.getElementById("blankSpaces").innerText = format;
 }
-blanks(answer);
+output() //initates blank spaces
 
-//WIP - determines if letter is in the answer, updates scores and canvas accordingly 
-function hangman(letter) {
+//determines if letter is in the answer, updates scores and canvas accordingly 
+function guessLetter(letter) {
   document.getElementById("letter"+letter).disabled = true;
   guesses++;
   guessedLetters.push(letter);
   if (answer.includes(letter)) {
-    console.log('letter in word');
+    output()
   }
   else {
     mistakes++;
@@ -41,8 +52,23 @@ function hangman(letter) {
   }
 }
 
-let c = document.getElementById("theGallows");
-let ctx = c.getContext("2d");
+//checks if guess is alphabetic and correct otherwise update mistakes
+function guessWord(word) {
+  if (/^[a-zA-Z()]+$/.test(word)) {
+    guesses++;
+    if (word.toUpperCase() == answer) {
+      alert("you win!")
+    }
+    else {
+      mistakes++;
+      updateCanvas(mistakes);
+    }
+  }
+}
+
+let canvas = document.getElementById("theGallows");
+let ctx = canvas.getContext("2d");
+//draws next part on canvas depending on mistakes made (lines get darker for some reason?)
 function updateCanvas(mistakes) {
   switch(mistakes) {
     case 1:

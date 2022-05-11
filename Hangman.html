@@ -30,14 +30,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#home">Hangman</a>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
             <li class="nav-item">
               <a class="nav-link" id="rules" href="">Rules</a>
             </li>
-
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#stats">Stats</a>
@@ -53,36 +50,36 @@
     <div class="slides" id="home">
       <p>Game</p>
       <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
-      <p id="blankSpaces"> </p>
+      <p id="blankSpaces"></p>
       <form>
         <label for="guessedWord">Guess:</label>
         <input type="text" id="guessedWord" name="guessedWord"><br><br>
-        <input type="button" id="letterA" value="A" onclick="hangman(this.value)">
-        <input type="button" id="letterB" value="B" onclick="hangman(this.value)">
-        <input type="button" id="letterC" value="C" onclick="hangman(this.value)">
-        <input type="button" id="letterD" value="D" onclick="hangman(this.value)">
-        <input type="button" id="letterE" value="E" onclick="hangman(this.value)">
-        <input type="button" id="letterF" value="F" onclick="hangman(this.value)">
-        <input type="button" id="letterG" value="G" onclick="hangman(this.value)">
-        <input type="button" id="letterH" value="H" onclick="hangman(this.value)">
-        <input type="button" id="letterI" value="I" onclick="hangman(this.value)">
-        <input type="button" id="letterJ" value="J" onclick="hangman(this.value)">
-        <input type="button" id="letterK" value="K" onclick="hangman(this.value)">
-        <input type="button" id="letterL" value="L" onclick="hangman(this.value)">
-        <input type="button" id="letterM" value="M" onclick="hangman(this.value)">
-        <input type="button" id="letterN" value="N" onclick="hangman(this.value)">
-        <input type="button" id="letterO" value="O" onclick="hangman(this.value)">
-        <input type="button" id="letterP" value="P" onclick="hangman(this.value)">
-        <input type="button" id="letterQ" value="Q" onclick="hangman(this.value)">
-        <input type="button" id="letterR" value="R" onclick="hangman(this.value)">
-        <input type="button" id="letterS" value="S" onclick="hangman(this.value)">
-        <input type="button" id="letterT" value="T" onclick="hangman(this.value)">
-        <input type="button" id="letterU" value="U" onclick="hangman(this.value)">
-        <input type="button" id="letterV" value="V" onclick="hangman(this.value)">
-        <input type="button" id="letterW" value="W" onclick="hangman(this.value)">
-        <input type="button" id="letterX" value="X" onclick="hangman(this.value)">
-        <input type="button" id="letterY" value="Y" onclick="hangman(this.value)">
-        <input type="button" id="letterZ" value="Z" onclick="hangman(this.value)">
+        <input type="button" id="letterA" value="A" onclick="guessLetter(this.value)">
+        <input type="button" id="letterB" value="B" onclick="guessLetter(this.value)">
+        <input type="button" id="letterC" value="C" onclick="guessLetter(this.value)">
+        <input type="button" id="letterD" value="D" onclick="guessLetter(this.value)">
+        <input type="button" id="letterE" value="E" onclick="guessLetter(this.value)">
+        <input type="button" id="letterF" value="F" onclick="guessLetter(this.value)">
+        <input type="button" id="letterG" value="G" onclick="guessLetter(this.value)">
+        <input type="button" id="letterH" value="H" onclick="guessLetter(this.value)">
+        <input type="button" id="letterI" value="I" onclick="guessLetter(this.value)">
+        <input type="button" id="letterJ" value="J" onclick="guessLetter(this.value)">
+        <input type="button" id="letterK" value="K" onclick="guessLetter(this.value)">
+        <input type="button" id="letterL" value="L" onclick="guessLetter(this.value)">
+        <input type="button" id="letterM" value="M" onclick="guessLetter(this.value)">
+        <input type="button" id="letterN" value="N" onclick="guessLetter(this.value)">
+        <input type="button" id="letterO" value="O" onclick="guessLetter(this.value)">
+        <input type="button" id="letterP" value="P" onclick="guessLetter(this.value)">
+        <input type="button" id="letterQ" value="Q" onclick="guessLetter(this.value)">
+        <input type="button" id="letterR" value="R" onclick="guessLetter(this.value)">
+        <input type="button" id="letterS" value="S" onclick="guessLetter(this.value)">
+        <input type="button" id="letterT" value="T" onclick="guessLetter(this.value)">
+        <input type="button" id="letterU" value="U" onclick="guessLetter(this.value)">
+        <input type="button" id="letterV" value="V" onclick="guessLetter(this.value)">
+        <input type="button" id="letterW" value="W" onclick="guessLetter(this.value)">
+        <input type="button" id="letterX" value="X" onclick="guessLetter(this.value)">
+        <input type="button" id="letterY" value="Y" onclick="guessLetter(this.value)">
+        <input type="button" id="letterZ" value="Z" onclick="guessLetter(this.value)">
       </form>
     </div>
     <div class="overlay" id="overlay">
