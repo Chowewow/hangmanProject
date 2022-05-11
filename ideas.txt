@@ -1,6 +1,12 @@
+CITS3403 stack:
+-Flask
+-SQLite
+-AJAX and JQuery
 
-Ideas
 
-Canvas
-Math 
-Typing
+What needs to be a function
+What needs to be a route
+What needs to be a table in the database
+What needs to have a jinja template
+
+Ideally it will be a word of the day hangman which generates challenging words that are unique and then provides the definition of them at the end of the game
