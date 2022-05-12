@@ -31,7 +31,6 @@ function output() {
       format += " ";
     }
     if (correctGuesses == answer.length) {
-      disableLetters()
       alert("you win!")
     }
   }
@@ -53,20 +52,12 @@ function guessLetter(letter) {
   }
 }
 
-//disables all letters 
-function disableLetters() {
-  for (let i = A; i <= Z; i++) {
-    document.getElementById("letter"+i).disabled = true;
-  }
-}
-
-//checks if guess is alphabetic and correct otherwise update mistakes
+//(requires submit button to work first) checks if guess is alphabetic and correct otherwise update mistakes
 function guessWord(word) {
   if (/^[a-zA-Z()]+$/.test(word)) {
     guesses++;
     if (word.toUpperCase() == answer) {
-      disableLetters();
-      alert("you win!");
+      alert("you win!")
     }
     else {
       mistakes++;
@@ -121,8 +112,4 @@ function updateCanvas(mistakes) {
       ctx.lineTo(300, 300);
   }
   ctx.stroke();
-  if (mistakes == 10) {
-    disableLetters();
-    alert("You Lose");
-  }
 }
