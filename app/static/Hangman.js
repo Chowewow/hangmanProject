@@ -8,9 +8,18 @@ $(document).ready(function () {
   $("#rules").click(function () {
     $("#overlay").show();
   });
+  $("#guessButton").click(function () {
+    guessWord($("#guessedWord").val());
+  });
+  $("#guessedWord").on("keydown", function (event) {
+    if (event.keyCode == 13) {
+      guessWord($("#guessedWord").val());
+      event.preventDefault();
+    }
+  });
 });
 
-//currently only works with capitalized letters, temporay answer of "HANGMAN"
+//currently only works with capitalized letters, temporary answer of "HANGMAN"
 let answer = "HANGMAN";
 let guesses = 0;
 let mistakes = 0;
@@ -31,8 +40,8 @@ function output() {
       format += " ";
     }
     if (correctGuesses == answer.length) {
-      disableLetters()
-      alert("you win!")
+      alert("you win!");
+      disableLetters();
     }
   }
   document.getElementById("blankSpaces").innerText = format;
@@ -53,10 +62,13 @@ function guessLetter(letter) {
   }
 }
 
-//disables all letters 
+//disables all letters
 function disableLetters() {
-  for (let i = A; i <= Z; i++) {
-    document.getElementById("letter"+i).disabled = true;
+  let chr = "A";
+  document.getElementById("guessButton").disabled = true;
+  for (let i = 0; i < 26; i++) {
+    chr = String.fromCharCode(65 + i);
+    document.getElementById("letter"+chr).disabled = true;
   }
 }
 
@@ -74,6 +86,8 @@ function guessWord(word) {
     }
   }
 }
+
+
 
 let canvas = document.getElementById("theGallows");
 let ctx = canvas.getContext("2d");

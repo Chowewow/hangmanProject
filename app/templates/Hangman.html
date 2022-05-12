@@ -6,8 +6,8 @@
   <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
   <p id="blankSpaces"></p>
   <form>
-    <label for="guessedWord">Guess:</label>
-    <input type="text" id="guessedWord" name="guessedWord"><br><br>
+    <input type="text" id="guessedWord" name="guessedWord" onsubmit="event.preventDefault()">
+    <input type="button" id="guessButton" value="Guess"></input><br><br>
     <input type="button" id="letterA" value="A" onclick="guessLetter(this.value)">
     <input type="button" id="letterB" value="B" onclick="guessLetter(this.value)">
     <input type="button" id="letterC" value="C" onclick="guessLetter(this.value)">
