@@ -1,3 +1,4 @@
+from crypt import methods
 from turtle import title
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
@@ -7,6 +8,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app.forms import LoginForm
+
 
 @app.route('/')
 @app.route('/hangman')
@@ -34,10 +36,12 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('hangman'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -52,3 +56,17 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/guest', methods=['GET', 'POST'])
+def guest():
+    user = User.query.filter_by(username='guest').first()
+    user.check_password('guest')
+    login_user(user)
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+        next_page = url_for('hangman')
+    return redirect(next_page)
+
+    
+    

@@ -18,3 +18,7 @@ body {
   border-radius: 10px;
   text-align: center;
 }
+
+#register, #login {
+  text-align: center;
+}
