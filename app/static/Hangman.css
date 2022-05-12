@@ -1,5 +1,8 @@
-.slides {
+body {
   background-color: burlywood;
+}
+
+.slides {
   height: 100vh;
   text-align: center;
 }

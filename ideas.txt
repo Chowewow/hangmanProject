@@ -10,3 +10,7 @@ What needs to be a table in the database
 What needs to have a jinja template
 
 Ideally it will be a word of the day hangman which generates challenging words that are unique and then provides the definition of them at the end of the game
+
+When working on the project estimate how long each task will take and then report how long it will actually take (with comments at the top of files)
+
+Use pip3 install -r requirements.txt 	to install the required python packages (once you are in ur venv)
