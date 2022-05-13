@@ -3,6 +3,7 @@ from datetime import datetime
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
 
 class User(UserMixin, db.Model):
 
@@ -10,6 +11,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(60), index=True, unique=True)
     username = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -19,6 +21,10 @@ class User(UserMixin, db.Model):
     
     def __repr__(self):
         return f'<User {self.username}>'
+    
+    def avatar(self, size):
+        digest = md5('hangguest@protonmail.com'.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=retro&s={}'.format(digest,size)
 
 class Scores(db.Model):
 

@@ -5,7 +5,7 @@ from app.models import User
 from app.forms import RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-
+from datetime import datetime
 from app.forms import LoginForm
 
 
@@ -73,3 +73,9 @@ def guest():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
