@@ -4,6 +4,7 @@ from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
+import random
 
 # scores = db.table('scores',
 #     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
@@ -19,6 +20,9 @@ class Words(db.Model):
     word = db.Column(db.String(60), index=True, unique=True)
     definition = db.Column(db.String(60), index=True, unique=True)
 
+    def get_word():
+        #hardcoded the dictionary range
+        return Words.query.get(random.randrange(1, 145))
     def __repr__(self):
         return '<Words {}>'.format(self.word)
 

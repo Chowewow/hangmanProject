@@ -1,7 +1,7 @@
 from turtle import title
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.models import User
+from app.models import User, Words
 from app.forms import RegistrationForm, LoginForm, EditProfileForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -14,7 +14,7 @@ from datetime import datetime
 @login_required
 def hangman():
 
-    return render_template('Hangman.html', title='Home')
+    return render_template('Hangman.html', title='Home', answerr=Words.get_word())
 
 
 # @loginrequired
