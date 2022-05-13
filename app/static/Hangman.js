@@ -20,7 +20,8 @@ $(document).ready(function () {
 });
 
 //currently only works with capitalized letters, temporary answer of "HANGMAN"
-let answer = "HANGMAN";
+let answer = document.getElementById('answer').innerHTML;
+
 let guesses = 0;
 let mistakes = 0;
 let guessedLetters = [];

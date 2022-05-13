@@ -22,7 +22,7 @@ class Words(db.Model):
 
     def get_word():
         #hardcoded the dictionary range
-        return Words.query.get(random.randrange(1, 145))
+        return Words.query.get(random.randrange(1, 145)).word.upper()
     def __repr__(self):
         return '<Words {}>'.format(self.word)
 

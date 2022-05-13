@@ -14,7 +14,7 @@ from datetime import datetime
 @login_required
 def hangman():
 
-    return render_template('Hangman.html', title='Home', answerr=Words.get_word())
+    return render_template('Hangman.html', title='Home', answer=Words.get_word())
 
 
 # @loginrequired
