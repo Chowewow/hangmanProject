@@ -20,9 +20,11 @@ class Words(db.Model):
     word = db.Column(db.String(60), index=True, unique=True)
     definition = db.Column(db.String(60), index=True, unique=True)
 
-    def get_word():
-        #hardcoded the dictionary range
-        return Words.query.get(random.randrange(1, 145)).word.upper()
+    # def get_word():
+    #     #hardcoded the dictionary range
+    #     num = random.randrange(1, 145)
+    #     return Words.query.get(num).word.upper(), Words.query.get(num).definition
+
     def __repr__(self):
         return '<Words {}>'.format(self.word)
 

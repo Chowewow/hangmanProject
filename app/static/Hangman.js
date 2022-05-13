@@ -20,8 +20,7 @@ $(document).ready(function () {
 });
 
 //currently only works with capitalized letters, temporary answer of "HANGMAN"
-let answer = document.getElementById('answer').innerHTML;
-
+let answer = $("#answer").text();
 let guesses = 0;
 let mistakes = 0;
 let guessedLetters = [];
@@ -41,8 +40,8 @@ function output() {
       format += " ";
     }
     if (correctGuesses == answer.length) {
-      alert("you win!");
       disableLetters();
+      alert("you win!");
     }
   }
   document.getElementById("blankSpaces").innerText = format;

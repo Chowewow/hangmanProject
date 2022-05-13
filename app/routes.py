@@ -6,15 +6,15 @@ from app.forms import RegistrationForm, LoginForm, EditProfileForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
-
+import random
 
 
 @app.route('/')
 @app.route('/hangman')
 @login_required
 def hangman():
-
-    return render_template('Hangman.html', title='Home', answer=Words.get_word())
+    rand = random.randrange(1,145)
+    return render_template('Hangman.html', title='Home', answer=Words.query.get(rand).word.upper(), definition=Words.query.get(rand).definition)
 
 
 # @loginrequired

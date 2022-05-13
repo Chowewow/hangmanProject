@@ -4,6 +4,7 @@
 <div class="slides" id="home">
   <p>Game</p>
   <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
+  <p id="definition">Definition: {{definition}}</p>
   <p id="blankSpaces"></p>
   <form>
     <input type="text" id="guessedWord" name="guessedWord">
@@ -35,6 +36,7 @@
     <input type="button" id="letterY" value="Y" onclick="guessLetter(this.value)">
     <input type="button" id="letterZ" value="Z" onclick="guessLetter(this.value)">
   </form>
+  
 </div>
 <div class="overlay" id="overlay">
   <div style="text-align: left; font-size: xx-large;">
@@ -52,10 +54,11 @@
     Less guesses = a higher score.
 
   </p>
-
+  <p id="answer" style="display: none;">{{answer}}</p>
 
 </div>
-<p id="answer" style="display: none;">{{answer}}</p>
+
+
 <!-- <div class="slides" id="stats">
   <p>Stats</p>
 </div> -->
