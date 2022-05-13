@@ -6,7 +6,7 @@
   <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
   <p id="blankSpaces"></p>
   <form>
-    <input type="text" id="guessedWord" name="guessedWord" onsubmit="event.preventDefault()">
+    <input type="text" id="guessedWord" name="guessedWord">
     <input type="button" id="guessButton" value="Guess"></input><br><br>
     <input type="button" id="letterA" value="A" onclick="guessLetter(this.value)">
     <input type="button" id="letterB" value="B" onclick="guessLetter(this.value)">
@@ -36,5 +36,37 @@
     <input type="button" id="letterZ" value="Z" onclick="guessLetter(this.value)">
   </form>
 </div>
+<div class="overlay" id="overlay">
+  <div style="text-align: left; font-size: xx-large;">
+    <span id="xBox" style="cursor: pointer;" aria-hidden="true">&nbsp; &times;</span>
+  </div>
+  <h1>Theme/Purpose</h1>
+  <p>
+    here is our theme
+  </p>
+  <p>
+    The goal is to guess the word using the least amount of guesses as possible.
+    You are allowed x amount of guesses, at each guess you can guess a letter or the word and if the letter is in the
+    word its position will be revealed.
+    If you lose all your guesses the man gets hanged.
+    Less guesses = a higher score.
 
+  </p>
+
+
+</div>
+
+<!-- <div class="slides" id="stats">
+  <p>Stats</p>
+</div> -->
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jQuery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--JS-->
+<script src="{{url_for('static', filename='Hangman.js')}}"></script>
 {%endblock%}

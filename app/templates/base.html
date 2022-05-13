@@ -25,7 +25,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!--CSS-->
-    <link rel="stylesheet" href="{{url_for('static', filename='Hangman.css')}} ">
+    
 
 
 
@@ -70,7 +70,7 @@
     {%endblock%}
     <div class="overlay" id="overlay">
         <div style="text-align: left; font-size: xx-large;">
-            <span id="xbox" style="cursor: pointer;" aria-hidden="true">&nbsp; &times;</span>
+            <span id="xBox" style="cursor: pointer;" aria-hidden="true">&nbsp; &times;</span>
         </div>
         <h1>Theme/Purpose</h1>
         <p>
@@ -113,6 +113,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!--JS-->
     <script src="{{url_for('static', filename='Hangman.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='Hangman.css')}} ">
 </body>
 
 </html>

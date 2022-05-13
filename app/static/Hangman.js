@@ -2,7 +2,7 @@ $(document).ready(function () {
   $("#home").click(function () {
     $("#overlay").hide();
   });
-  $("#xbox").click(function () {
+  $("#xBox").click(function () {
     $("#overlay").hide();
   });
   $("#rules").click(function () {
@@ -133,6 +133,13 @@ function updateCanvas(mistakes) {
     case 10:
       ctx.moveTo(250, 250);
       ctx.lineTo(300, 300);
+      ctx.moveTo(240, 110);
+      ctx.lineTo(260, 120);
+      ctx.moveTo(240, 120);
+      ctx.lineTo(260, 110);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(250, 135, 10, Math.PI, 0);
   }
   ctx.stroke();
   if (mistakes == 10) {
