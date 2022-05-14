@@ -1,7 +1,7 @@
 # hangmanProject 
 To run this project you will need python, once installed open terminal/cmd in this directory and type:
 
-Python3 -m venv venv  
+python3 -m venv venv  (or python -m venv venv)
 source venv/bin/activate (source venv/Scripts/activate for Windows)  
 pip3 install -r requirements.txt  
 flask run  
