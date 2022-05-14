@@ -19,3 +19,4 @@ pip3 install -r requirements.txt
 Flask run
 
 Gothic css theme if possible
+Next word button, 
