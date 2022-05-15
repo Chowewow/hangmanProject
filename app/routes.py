@@ -13,7 +13,7 @@ import random
 @app.route('/hangman')
 @login_required
 def hangman():
-    rand = random.randrange(1,145)
+    rand = random.randrange(1,len(Words.query.all()))
     return render_template('Hangman.html', title='Home', answer=Words.query.get(rand).word.upper(), definition=Words.query.get(rand).definition)
 
 
