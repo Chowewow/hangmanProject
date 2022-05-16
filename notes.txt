@@ -18,5 +18,16 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 Flask run
 
-Gothic css theme if possible
-Next word button, 
+
+-Next word button
+-lose and win screen
+-hard mode
+-make css compatible with phone browsers
+
+
+-modify schema and create scores page
+-reference pics
+-improve edit profile page
+
+Low priority implementations:
+-make login page uncompulsory
