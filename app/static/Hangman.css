@@ -14,9 +14,20 @@ body {
   background-color: rgb(206, 206, 206);
   border-radius: 5px;
   outline: rgb(66, 66, 66) outset 10px;
+  margin: 10px;
 }
 
 input {
+  color: rgb(206, 206, 206);
+  background-color: rgb(20, 20, 20);
+  border-color: rgb(66, 66, 66);
+  border-radius: 4px;
+  margin: 2px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+#difficulty {
   color: rgb(206, 206, 206);
   background-color: rgb(20, 20, 20);
   border-color: rgb(66, 66, 66);
@@ -37,13 +48,31 @@ input:disabled {
   color: rgb(206, 206, 206);
 }
 
-.overlay {
+.about {
   display: none;
-  z-index: 1;
+  z-index: 2;
   top: 25%;
   left: 25%;
   width: 50%;
   height: 50%;
+  position: absolute;
+  background-color: rgb(20, 20, 20);
+  color: rgb(206, 206, 206);
+  border-radius: 10px;
+  text-align: center;
+  border-color: rgb(66, 66, 66);
+  border-width: 2px;
+  border-style: solid;
+}
+
+
+#loseScreen {
+  display: none;
+  z-index: 2;
+  top: 25%;
+  left: 40%;
+  width: 20%;
+  height: 10%;
   position: absolute;
   background-color: rgb(20, 20, 20);
   color: rgb(206, 206, 206);

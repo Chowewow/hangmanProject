@@ -2,7 +2,6 @@
 
 {%block content %}
 <div class="slides" id="home">
-  <p>Game</p>
   <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
   <p id="definition">Definition: {{definition}}</p>
   <p id="blankSpaces"></p>
@@ -36,9 +35,9 @@
     <input type="button" id="letterY" value="Y" onclick="guessLetter(this.value)">
     <input type="button" id="letterZ" value="Z" onclick="guessLetter(this.value)">
   </form>
-
+  <button id="difficulty" onclick="changeDifficulty()">Hard Mode</button>
 </div>
-<div class="overlay" id="overlay">
+<div class="about" id="about">
   <div style="text-align: left; font-size: xx-large;">
     <span id="xBox" style="cursor: pointer;" aria-hidden="true">&nbsp; &times;</span>
   </div>
@@ -59,7 +58,12 @@
     <p id="answer" style="display: none;">{{answer}}</p>
   </div>
 </div>
-
+<div class="loseScreen" id="loseScreen">
+  <div>
+    <h3>You Lose</h3>    
+    <input type="button" id="playAgain" value="Play Again?">
+  </div>
+</div>
 
 <!-- <div class="slides" id="stats">
   <p>Stats</p>

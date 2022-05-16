@@ -17,6 +17,17 @@ $(document).ready(function () {
       event.preventDefault();
     }
   });
+  // $("#difficulty").on("click", function() {
+  //   if (hardMode) {
+  //     $("#difficulty").val("Normal Mode");
+  //     hardMode = false;
+  //     console.log("Normal mode on");
+  //   }
+  //   else {
+  //     $("#difficulty").val("Hard Mode");
+  //     hardMode = true;
+  //   }
+  // });
 });
 
 //currently only works with capitalized letters, temporary answer of "HANGMAN"
@@ -25,17 +36,20 @@ let guesses = 0;
 let mistakes = 0;
 let guessedLetters = [];
 let correctGuesses = 0;
+let hardMode = false;
+
 
 //outputs blank spaces or correctly guessed letters in position
 function output() {
   let format = "";
   correctGuesses = 0;
   for (let i = 0; i < answer.length; i++) {
-    if (guessedLetters.includes(answer.charAt(i))){
+    if (guessedLetters.includes(answer.charAt(i))) {
       format += answer.charAt(i);
-      correctGuesses++
+      correctGuesses++;
+    } else {
+      format += "_";
     }
-    else {format += "_";}
     if (i < answer.length - 1) {
       format += " ";
     }
@@ -46,29 +60,32 @@ function output() {
   }
   document.getElementById("blankSpaces").innerText = format;
 }
-output() //initates blank spaces
+output(); //initates blank spaces
 
-//determines if letter is in the answer, updates scores and canvas accordingly 
+//determines if letter is in the answer, updates scores and canvas accordingly
 function guessLetter(letter) {
-  document.getElementById("letter"+letter).disabled = true;
+  document.getElementById("letter" + letter).disabled = true;
   guesses++;
   guessedLetters.push(letter);
   if (answer.includes(letter)) {
-    output()
-  }
-  else {
+    output();
+  } else {
     mistakes++;
     updateCanvas(mistakes);
+    if (hardMode) {
+      mistakes++;
+      updateCanvas(mistakes);
+    }
   }
 }
 
-//disables all letters
+//disables all input buttons
 function disableLetters() {
   let chr = "A";
   document.getElementById("guessButton").disabled = true;
   for (let i = 0; i < 26; i++) {
     chr = String.fromCharCode(65 + i);
-    document.getElementById("letter"+chr).disabled = true;
+    document.getElementById("letter" + chr).disabled = true;
   }
 }
 
@@ -79,21 +96,34 @@ function guessWord(word) {
     if (word.toUpperCase() == answer) {
       disableLetters();
       alert("you win!");
-    }
-    else {
+    } else {
       mistakes++;
       updateCanvas(mistakes);
+      if (hardMode) {
+        mistakes++;
+        updateCanvas(mistakes);
+      }
     }
   }
 }
 
-
+function changeDifficulty() {
+  if (hardMode) {
+    console.log("Normal mode on");
+    document.getElementById("difficulty").innerHTML = "Normal Mode";
+    hardMode = false;
+  } else {
+    console.log("Normal mode off");
+    document.getElementById("difficulty").innerHTML = "Hard Mode";
+    hardMode = true;
+  }
+}
 
 let canvas = document.getElementById("theGallows");
 let ctx = canvas.getContext("2d");
 //draws next part on canvas depending on mistakes made (lines get darker for some reason?)
 function updateCanvas(mistakes) {
-  switch(mistakes) {
+  switch (mistakes) {
     case 1:
       ctx.moveTo(100, 350);
       ctx.lineTo(500, 350);
@@ -144,6 +174,6 @@ function updateCanvas(mistakes) {
   ctx.stroke();
   if (mistakes == 10) {
     disableLetters();
-    alert("You Lose");
+    $("#loseScreen").show();
   }
 }
