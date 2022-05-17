@@ -29,7 +29,7 @@ $(document).ready(function () {
   
 });
 
-//currently only works with capitalized letters, temporary answer of "HANGMAN"
+//currently only works with capitalized letters
 let answer = $("#answer").text();
 let guesses = 0;
 let mistakes = 0;
@@ -80,8 +80,8 @@ function guessLetter(letter) {
 
 //disables all input buttons
 function disableLetters() {
-  let chr = "A";
   document.getElementById("guessButton").disabled = true;
+  let chr = "A";
   for (let i = 0; i < 26; i++) {
     chr = String.fromCharCode(65 + i);
     document.getElementById("letter" + chr).disabled = true;
@@ -103,6 +103,8 @@ function guessWord(word) {
         updateCanvas(mistakes);
       }
     }
+  } else {
+    alert("Alphabetical Characters Only")
   }
 }
 
