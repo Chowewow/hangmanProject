@@ -5,77 +5,20 @@
   <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
   <p id="definition">Definition: {{definition}}</p>
   <p id="blankSpaces"></p>
-  <form>
+  <form id="keys">
     <input type="text" id="guessedWord" name="guessedWord">
-    <input type="button" id="guessButton" value="Guess"></input><br><br>
-    <input type="button" id="letterA" value="A" onclick="guessLetter(this.value)">
-    <input type="button" id="letterB" value="B" onclick="guessLetter(this.value)">
-    <input type="button" id="letterC" value="C" onclick="guessLetter(this.value)">
-    <input type="button" id="letterD" value="D" onclick="guessLetter(this.value)">
-    <input type="button" id="letterE" value="E" onclick="guessLetter(this.value)">
-    <input type="button" id="letterF" value="F" onclick="guessLetter(this.value)">
-    <input type="button" id="letterG" value="G" onclick="guessLetter(this.value)">
-    <input type="button" id="letterH" value="H" onclick="guessLetter(this.value)">
-    <input type="button" id="letterI" value="I" onclick="guessLetter(this.value)">
-    <input type="button" id="letterJ" value="J" onclick="guessLetter(this.value)">
-    <input type="button" id="letterK" value="K" onclick="guessLetter(this.value)">
-    <input type="button" id="letterL" value="L" onclick="guessLetter(this.value)">
-    <input type="button" id="letterM" value="M" onclick="guessLetter(this.value)">
-    <input type="button" id="letterN" value="N" onclick="guessLetter(this.value)">
-    <input type="button" id="letterO" value="O" onclick="guessLetter(this.value)">
-    <input type="button" id="letterP" value="P" onclick="guessLetter(this.value)">
-    <input type="button" id="letterQ" value="Q" onclick="guessLetter(this.value)">
-    <input type="button" id="letterR" value="R" onclick="guessLetter(this.value)">
-    <input type="button" id="letterS" value="S" onclick="guessLetter(this.value)">
-    <input type="button" id="letterT" value="T" onclick="guessLetter(this.value)">
-    <input type="button" id="letterU" value="U" onclick="guessLetter(this.value)">
-    <input type="button" id="letterV" value="V" onclick="guessLetter(this.value)">
-    <input type="button" id="letterW" value="W" onclick="guessLetter(this.value)">
-    <input type="button" id="letterX" value="X" onclick="guessLetter(this.value)">
-    <input type="button" id="letterY" value="Y" onclick="guessLetter(this.value)">
-    <input type="button" id="letterZ" value="Z" onclick="guessLetter(this.value)">
+    <button id="guessButton">Guess</button><br><br>
+    <!--keys go here-->
   </form>
   <button id="difficulty" onclick="changeDifficulty()">Difficulty: Normal</button>
 </div>
-<div class="about" id="about">
-  <div style="text-align: left; font-size: xx-large;">
-    <span id="xBox" style="cursor: pointer;" aria-hidden="true">&nbsp; &times;</span>
-  </div>
-  <div style="margin: 20px;">
-    <h1>About</h1>
-    <p>
-      We created this puzzle in the hopes that it would be a helpful tool in expanding the users vocabulary.
-      We thought hangman would be an entertaining and pragmatic way to do this.
-    </p>
-    <p>
-      The goal is to guess the word using the least amount of guesses as possible.
-      You are allowed 10 guesses, at each guess you can guess a letter or the word and if the letter is in the
-      word its position will be revealed.
-      If you lose all your guesses the man gets hanged.
-      Less guesses = a higher score.
 
-    </p>
-    <p id="answer" style="display: none;">{{answer}}</p>
-  </div>
-</div>
 <div class="loseScreen" id="loseScreen">
   <div>
     <h3>You Lose</h3>    
-    <input type="button" id="playAgain" value="Play Again?">
+    <button id="playAgain" class="">Play Again?</button>
   </div>
 </div>
 
-<!-- <div class="slides" id="stats">
-  <p>Stats</p>
-</div> -->
 
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jQuery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
-<script src="js/script.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!--JS-->
-<script src="{{url_for('static', filename='Hangman.js')}}"></script>
 {%endblock%}

@@ -1,12 +1,21 @@
 $(document).ready(function () {
+  let count = 0;
+  while (count < 26){
+    let letter = String.fromCharCode(65 + count)
+    $("#keys").append(`<button id="letter${letter}" onclick="guessLetter(this.innerHTML)">${letter}</button>`);
+    $(`#letter${letter}`).on("click", function(){
+      guessLetter(`${letter}`);
+    });
+    count++;
+  }
   $("#home").click(function () {
-    $("#overlay").hide();
+    $("#about").hide();
   });
   $("#xBox").click(function () {
-    $("#overlay").hide();
+    $("#about").hide();
   });
   $("#rules").click(function () {
-    $("#overlay").show();
+    $("#about").show();
   });
   $("#guessButton").click(function () {
     guessWord($("#guessedWord").val());
@@ -17,17 +26,7 @@ $(document).ready(function () {
       event.preventDefault();
     }
   });
-  // $("#difficulty").on("click", function() {
-  //   if (hardMode) {
-  //     $("#difficulty").val("Normal Mode");
-  //     hardMode = false;
-  //     console.log("Normal mode on");
-  //   }
-  //   else {
-  //     $("#difficulty").val("Hard Mode");
-  //     hardMode = true;
-  //   }
-  // });
+  
 });
 
 //currently only works with capitalized letters, temporary answer of "HANGMAN"
