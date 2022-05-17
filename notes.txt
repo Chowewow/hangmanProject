@@ -31,3 +31,5 @@ Flask run
 
 Low priority implementations:
 -make login page uncompulsory
+
+Add a win animation using javascript animation functions
