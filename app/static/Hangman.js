@@ -2,7 +2,7 @@ $(document).ready(function () {
   let count = 0;
   while (count < 26){
     let letter = String.fromCharCode(65 + count)
-    $("#keys").append(`<button id="letter${letter}" onclick="guessLetter(this.innerHTML)">${letter}</button>`);
+    $("#keys").append(`<button id="letter${letter}">${letter}</button>`);
     $(`#letter${letter}`).on("click", function(){
       guessLetter(`${letter}`);
     });
