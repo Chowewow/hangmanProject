@@ -108,14 +108,16 @@ function guessWord(word) {
 }
 
 function changeDifficulty() {
-  if (hardMode) {
+  if (hardMode && guesses == 0) {
     console.log("Normal mode on");
-    document.getElementById("difficulty").innerHTML = "Normal Mode";
+    document.getElementById("difficulty").innerHTML = "Difficulty: Normal";
     hardMode = false;
-  } else {
+  } else if (!hardMode && guesses == 0) {
     console.log("Normal mode off");
-    document.getElementById("difficulty").innerHTML = "Hard Mode";
+    document.getElementById("difficulty").innerHTML = `Difficulty: <span style="color: red;">Hard</span>`;
     hardMode = true;
+  } else {
+    alert("You can't change difficulty during the game");
   }
 }
 
