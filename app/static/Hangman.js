@@ -8,16 +8,14 @@ $(document).ready(function () {
     });
     count++;
   }
-  $("#home").click(function () {
+
+  $("#xBox").click(() =>  {
     $("#about").hide();
   });
-  $("#xBox").click(function () {
-    $("#about").hide();
-  });
-  $("#rules").click(function () {
+  $("#rules").click(() =>  {
     $("#about").show();
   });
-  $("#guessButton").click(function () {
+  $("#guessButton").click(() => {
     guessWord($("#guessedWord").val());
   });
   $("#guessedWord").on("keydown", function (event) {
@@ -25,6 +23,9 @@ $(document).ready(function () {
       guessWord($("#guessedWord").val());
       event.preventDefault();
     }
+  });
+  $("#playAgain").on("click", () => {
+    location.reload();
   });
   
 });
@@ -64,9 +65,10 @@ output(); //initates blank spaces
 //determines if letter is in the answer, updates scores and canvas accordingly
 function guessLetter(letter) {
   document.getElementById("letter" + letter).disabled = true;
-  guesses++;
+  // guesses++;
   guessedLetters.push(letter);
   if (answer.includes(letter)) {
+    guesses++;
     output();
   } else {
     mistakes++;
@@ -76,6 +78,7 @@ function guessLetter(letter) {
       updateCanvas(mistakes);
     }
   }
+  $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
 }
 
 //disables all input buttons
@@ -91,8 +94,8 @@ function disableLetters() {
 //checks if guess is alphabetic and correct otherwise update mistakes
 function guessWord(word) {
   if (/^[a-zA-Z()]+$/.test(word)) {
-    guesses++;
     if (word.toUpperCase() == answer) {
+      guesses++;
       disableLetters();
       alert("you win!");
     } else {
@@ -103,17 +106,18 @@ function guessWord(word) {
         updateCanvas(mistakes);
       }
     }
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
   } else {
     alert("Alphabetical Characters Only")
   }
 }
 
 function changeDifficulty() {
-  if (hardMode && guesses == 0) {
+  if (hardMode && (guesses == 0 && mistakes == 0)) {
     console.log("Normal mode on");
     document.getElementById("difficulty").innerHTML = "Difficulty: Normal";
     hardMode = false;
-  } else if (!hardMode && guesses == 0) {
+  } else if (!hardMode && (guesses == 0 && mistakes == 0)) {
     console.log("Normal mode off");
     document.getElementById("difficulty").innerHTML = `Difficulty: <span style="color: red;">Hard</span>`;
     hardMode = true;
