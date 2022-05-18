@@ -3,9 +3,10 @@ body {
   color: antiquewhite;
   font-family: cursive, 'Times New Roman', Times, serif, Georgia; 
   font-size: large;
+  
 }
 
-.slides {
+.slides, #wotd {
   height: 100vh;
   text-align: center;
 }

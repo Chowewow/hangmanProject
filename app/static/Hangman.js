@@ -27,18 +27,17 @@ $(document).ready(function () {
   $("#playAgain").on("click", () => {
     location.reload();
   });
-  
+
 });
 
-//currently only works with capitalized letters
+
 let answer = $("#answer").text();
 let guesses = 0;
 let mistakes = 0;
 let guessedLetters = [];
 let correctGuesses = 0;
 let hardMode = false;
-//WIP
-let hasPlayed = false;
+
 
 //outputs blank spaces or correctly guessed letters in position
 function output() {
@@ -67,20 +66,25 @@ output(); //initates blank spaces
 //determines if letter is in the answer, updates scores and canvas accordingly
 function guessLetter(letter) {
   document.getElementById("letter" + letter).disabled = true;
-  // guesses++;
   guessedLetters.push(letter);
-  if (answer.includes(letter)) {
+  if (answer.includes(letter) && hardMode) {
+    guesses++;
+    output();
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
+  } else if(answer.includes(letter) && !hardMode){
     guesses++;
     output();
     $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
-  } else {
+  } else if (!answer.includes(letter) && hardMode) {
+    mistakes ++;
+    updateCanvas(mistakes);
     mistakes++;
     updateCanvas(mistakes);
-    if (hardMode) {
-      mistakes++;
-      updateCanvas(mistakes);
-      $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
-    }
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
+  } else if (!answer.includes(letter) && !hardMode){
+    mistakes++;
+    updateCanvas(mistakes);
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
   }
 }
 

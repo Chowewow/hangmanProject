@@ -12,13 +12,18 @@ from werkzeug.urls import url_parse
 from datetime import datetime, date
 import random
 
+user_date = (date.today().day + (date.today().month * 30)) % len(Words.query.all())
+answer = Words.query.get(user_date).word.upper()
+wordID = Words.query.filter_by(word=str(answer).capitalize()).first_or_404().id
+definition = Words.query.get(user_date).definition
 
 @app.route('/')
 @app.route('/hangman', methods=['Get', 'Post'])
 @login_required
 def hangman():
-    user_date = (date.today().day + (date.today().month * 30)) % len(Words.query.all())
-    return render_template('Hangman.html', title='Home', answer=Words.query.get(user_date).word.upper(), definition=Words.query.get(user_date).definition)
+    if len(Scores.query.filter_by(user_id=current_user.id, word_id=wordID).all()) != 0:
+        return redirect(url_for('wotd'))
+    return render_template('Hangman.html', title='Home', answer=answer, definition=definition)
 
 
 # @loginrequired
@@ -103,13 +108,19 @@ def edit_profile():
 def processUserInfo(userInfo):
     userInfo = json.loads(userInfo)
     score = userInfo.get('guesses') + userInfo.get('mistakes')
-    the_word = str(userInfo.get('word')).capitalize()
-    wordID = Words.query.filter_by(word=the_word).first_or_404().id
     s = Scores(number_of_guesses=score, user_id=current_user.id, word_id=wordID)
-    db.session.add(s)
-    db.session.commit()
-    return render_template('Hangman.html')
+    if current_user.id != 1:
+        db.session.add(s)
+        db.session.commit()
+    return str(current_user.id)
 
 @app.route('/leaderboard', methods=['GET', 'POST'])
 def leaderboard():
     return render_template('leaderboard.html')
+
+@app.route('/wotd', methods=['GET'])
+@login_required
+def wotd():
+    return render_template('wotd.html', word=answer.capitalize(), 
+    score=Scores.query.filter_by(user_id=current_user.id, word_id=wordID).first_or_404().number_of_guesses,
+    definition=definition)
