@@ -19,9 +19,7 @@ pip3 install -r requirements.txt
 Flask run
 
 
--Next word button
 -lose and win screen
--hard mode
 -make css compatible with phone browsers
 
 

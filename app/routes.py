@@ -1,20 +1,24 @@
+from crypt import methods
+import json
+import re
 from turtle import title
-from flask import render_template, flash, redirect, url_for, request
+from unittest import result
+from flask import Flask, render_template, flash, redirect, url_for, request
 from app import app, db
-from app.models import User, Words
+from app.models import Scores, User, Words
 from app.forms import RegistrationForm, LoginForm, EditProfileForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from datetime import datetime
+from datetime import datetime, date
 import random
 
 
 @app.route('/')
-@app.route('/hangman')
+@app.route('/hangman', methods=['Get', 'Post'])
 @login_required
 def hangman():
-    rand = random.randrange(1,len(Words.query.all()))
-    return render_template('Hangman.html', title='Home', answer=Words.query.get(rand).word.upper(), definition=Words.query.get(rand).definition)
+    user_date = (date.today().day + (date.today().month * 30)) % len(Words.query.all())
+    return render_template('Hangman.html', title='Home', answer=Words.query.get(user_date).word.upper(), definition=Words.query.get(user_date).definition)
 
 
 # @loginrequired
@@ -67,18 +71,20 @@ def guest():
         next_page = url_for('hangman')
     return redirect(next_page)
 
-    
+
 @app.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
 
+
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -92,3 +98,18 @@ def edit_profile():
     elif request.method == 'GET':
         form.username.data = current_user.username
     return render_template('edit_profile.html', title='Edit Profile', form=form)
+
+@app.route('/processUserInfo/<string:userInfo>', methods=['POST'])
+def processUserInfo(userInfo):
+    userInfo = json.loads(userInfo)
+    score = userInfo.get('guesses') + userInfo.get('mistakes')
+    the_word = str(userInfo.get('word')).capitalize()
+    wordID = Words.query.filter_by(word=the_word).first_or_404().id
+    s = Scores(number_of_guesses=score, user_id=current_user.id, word_id=wordID)
+    db.session.add(s)
+    db.session.commit()
+    return render_template('Hangman.html')
+
+@app.route('/leaderboard', methods=['GET', 'POST'])
+def leaderboard():
+    return render_template('leaderboard.html')

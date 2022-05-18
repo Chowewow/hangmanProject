@@ -41,7 +41,7 @@ button:disabled {
 }
 
 /* condense about and losescreen into one*/
-#about {
+#about{
   display: none;
   z-index: 2;
   top: 25%;
@@ -87,6 +87,6 @@ button:disabled {
 #score {
   z-index: 1;
   position: relative; 
-  top: -32.5%;
+  top: -30%;
   color: black;
 }

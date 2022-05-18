@@ -37,7 +37,8 @@ let mistakes = 0;
 let guessedLetters = [];
 let correctGuesses = 0;
 let hardMode = false;
-
+//WIP
+let hasPlayed = false;
 
 //outputs blank spaces or correctly guessed letters in position
 function output() {
@@ -55,6 +56,7 @@ function output() {
     }
     if (correctGuesses == answer.length) {
       disableLetters();
+      sendUserInfo();
       alert("you win!");
     }
   }
@@ -70,15 +72,16 @@ function guessLetter(letter) {
   if (answer.includes(letter)) {
     guesses++;
     output();
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
   } else {
     mistakes++;
     updateCanvas(mistakes);
     if (hardMode) {
       mistakes++;
       updateCanvas(mistakes);
+      $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
     }
   }
-  $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
 }
 
 //disables all input buttons
@@ -89,6 +92,7 @@ function disableLetters() {
     chr = String.fromCharCode(65 + i);
     document.getElementById("letter" + chr).disabled = true;
   }
+  document.getElementById("guessedWord").disabled = true;
 }
 
 //checks if guess is alphabetic and correct otherwise update mistakes
@@ -97,16 +101,19 @@ function guessWord(word) {
     if (word.toUpperCase() == answer) {
       guesses++;
       disableLetters();
+      sendUserInfo();
       alert("you win!");
     } else {
       mistakes++;
       updateCanvas(mistakes);
+      $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
       if (hardMode) {
         mistakes++;
         updateCanvas(mistakes);
+        $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
       }
     }
-    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
+    
   } else {
     alert("Alphabetical Characters Only")
   }
@@ -114,11 +121,9 @@ function guessWord(word) {
 
 function changeDifficulty() {
   if (hardMode && (guesses == 0 && mistakes == 0)) {
-    console.log("Normal mode on");
     document.getElementById("difficulty").innerHTML = "Difficulty: Normal";
     hardMode = false;
   } else if (!hardMode && (guesses == 0 && mistakes == 0)) {
-    console.log("Normal mode off");
     document.getElementById("difficulty").innerHTML = `Difficulty: <span style="color: red;">Hard</span>`;
     hardMode = true;
   } else {
@@ -183,4 +188,24 @@ function updateCanvas(mistakes) {
     disableLetters();
     $("#loseScreen").show();
   }
+}
+
+function sendUserInfo() {
+  if (hardMode){
+    mistakes = mistakes/2;
+  }
+
+  let userInfo = {
+    'guesses': guesses, 
+    'mistakes': mistakes, 
+    'word': answer,
+
+  }
+  const request = new XMLHttpRequest()
+  request.open('POST', `/processUserInfo/${JSON.stringify(userInfo)}`)
+  request.onload = () => {
+    const flaskMessage = request.responseText
+    console.log(flaskMessage)
+  }
+  request.send()
 }

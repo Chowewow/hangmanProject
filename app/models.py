@@ -6,12 +6,6 @@ from flask_login import UserMixin
 from hashlib import md5
 import random
 
-# scores = db.table('scores',
-#     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-#     db.Column('word_id', db.Integer, db.ForeignKey('words.id')))
-#      db.Column('score', db.Integer),
-#      db.Column('recorded', db.Date, index=True, default=datetime.utcnow)
-    
 
 
 class Words(db.Model):
@@ -20,10 +14,6 @@ class Words(db.Model):
     word = db.Column(db.String(60), index=True, unique=True)
     definition = db.Column(db.String(60), index=True, unique=True)
 
-    # def get_word():
-    #     #hardcoded the dictionary range
-    #     num = random.randrange(1, 145)
-    #     return Words.query.get(num).word.upper(), Words.query.get(num).definition
 
     def __repr__(self):
         return '<Words {}>'.format(self.word)
@@ -36,11 +26,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
-    # score = db.relationship(
-    #     'User', secondary=scores,
-    #     primaryjoin=(scores.c.user_id == id),
-    #     secondaryjoin=(scores.c.word_id == Words.id),
-    #     backref=db.backref('Scores', lazy='dynamic'), lazy='dynamic')
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
