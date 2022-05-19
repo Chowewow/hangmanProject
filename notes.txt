@@ -23,9 +23,9 @@ Flask run
 -make css compatible with phone browsers <- needs to be tested
 -make hangman thiccer
 
--modify schema(maybe) and create scores page
+
 -reference pics/sources
--improve edit profile page
+-improve edit profile page (add profile pic upload)
 -include hard mode tag on scoreboard
 
 Low priority implementations:
