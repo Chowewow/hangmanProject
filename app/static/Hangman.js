@@ -84,7 +84,7 @@ function guessLetter(letter) {
   } else if (!answer.includes(letter) && !hardMode){
     mistakes++;
     updateCanvas(mistakes);
-    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
   }
 }
 
@@ -197,12 +197,13 @@ function updateCanvas(mistakes) {
 
 function sendUserInfo() {
   if (hardMode){
-    mistakes = mistakes/2;
+    //send
+    mistakes = mistakes;
   }
 
   let userInfo = {
     'guesses': guesses, 
-    'mistakes': mistakes, 
+    'mistakes': mistakes/2, 
     'word': answer,
 
   }

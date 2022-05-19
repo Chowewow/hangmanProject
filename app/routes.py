@@ -122,7 +122,10 @@ def processUserInfo(userInfo):
 
 @app.route('/leaderboard', methods=['GET', 'POST'])
 def leaderboard():
-    return render_template('leaderboard.html')
+    dict = []
+    for score in Scores.query.all():
+        dict.append([User.query.get(score.user_id).username, score.number_of_guesses, Words.query.get(score.word_id).word]) 
+    return render_template('leaderboard.html', user_score=dict)
 
 
 @app.route('/wotd', methods=['GET'])
