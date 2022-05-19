@@ -30,7 +30,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(60), index=True, unique=True)
     username = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow())
 
 
     def set_password(self, password):

@@ -36,7 +36,7 @@
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('leaderboard') }}">Leaderboard</a>
+                        <a class="nav-link" href="{{ url_for('scoreboard') }}">Scoreboard</a>
                     </li>
                     {% if current_user.is_anonymous %}
                     <li class="nav-item">
@@ -69,7 +69,8 @@
             </p>
             <p>
                 The goal is to guess the word using the least amount of guesses as possible.
-                You are allowed 10 mistakes, at each guess you can guess a letter or the word and if the letter is in the
+                You are allowed 10 mistakes, at each guess you can guess a letter or the word and if the letter is in
+                the
                 word its position will be revealed.
                 If you lose all your guesses the man gets hanged.
                 Less guesses = a better score.

@@ -86,7 +86,10 @@ def guest():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user)
+    dict = {}
+    for score in Scores.query.filter_by(user_id=current_user.id).all():
+        dict[f"{Words.query.get(score.word_id).word}"] = f"{score.number_of_guesses}"
+    return render_template('user.html', user=user, dict=dict)
 
 
 @app.before_request
@@ -121,16 +124,16 @@ def processUserInfo(userInfo):
         db.session.commit()
     return str(current_user.id)
 
-# renders the leaderboard html page and
+# renders the scoreboard html page and
 
 
-@app.route('/leaderboard', methods=['GET', 'POST'])
-def leaderboard():
+@app.route('/scoreboard', methods=['GET', 'POST'])
+def scoreboard():
     player_scores = []
     for score in Scores.query.all():
         player_scores.append([User.query.get(score.user_id).username,
                              score.number_of_guesses, Words.query.get(score.word_id).word])
-    return render_template('leaderboard.html', user_score=player_scores)
+    return render_template('scoreboard.html', user_score=player_scores)
 
 # renders word of the day html page and loads in the users score, definition, and their previous scores
 
@@ -138,9 +141,7 @@ def leaderboard():
 @app.route('/wotd', methods=['GET'])
 @login_required
 def wotd():
-    dict = {}
-    for score in Scores.query.filter_by(user_id=current_user.id).all():
-        dict[f"{Words.query.get(score.word_id).word}"] = f"{score.number_of_guesses}"
+    
 
     return render_template('wotd.html', word=answer.capitalize(),
                            score=Scores.query.filter_by(
