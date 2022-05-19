@@ -3,15 +3,15 @@
 <table>
 
     <tr>
-        <th style="border: 5px double darkmagenta; padding: 5px; ">User </th>
-        <th style="border: 5px double darkmagenta; padding: 5px;">Score</th>
-        <th style="border: 5px double darkmagenta; padding: 5px;">Word</th>
+        <th class="scores">User </th>
+        <th class="scores">Score</th>
+        <th class="scores">Word</th>
     </tr>
     {% for item, item2, item3 in user_score %}
     <tr>
-        <td style="border: 5px double darkmagenta; padding: 5px;">{{item}}</td>
-        <td style="border: 5px double darkmagenta; padding: 5px; text-align: center;">{{item2}}</td>
-        <td style="border: 5px double darkmagenta; padding: 5px; text-align: center;">{{item3}}</td>
+        <td class="scores">{{item}}</td>
+        <td class="scores" style="text-align: center;">{{item2}}</td>
+        <td class="scores" style="text-align: center;">{{item3}}</td>
     </tr>
     {% endfor %}
 
