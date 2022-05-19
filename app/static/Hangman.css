@@ -7,7 +7,6 @@ body {
 }
 
 .slides, #wotd {
-  height: 100vh;
   text-align: center;
 }
 
@@ -88,6 +87,12 @@ button:disabled {
 #score {
   z-index: 1;
   position: relative; 
-  top: -30%;
+  top: -400px;
   color: black;
+}
+
+#stats{
+  border: 2px groove whitesmoke;
+  position: relative;
+  left: 46%;
 }

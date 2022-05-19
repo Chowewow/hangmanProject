@@ -190,6 +190,7 @@ function updateCanvas(mistakes) {
   ctx.stroke();
   if (mistakes == 10) {
     disableLetters();
+    sendUserInfo();
     $("#loseScreen").show();
   }
 }

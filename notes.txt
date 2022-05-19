@@ -19,15 +19,17 @@ pip3 install -r requirements.txt
 Flask run
 
 
--lose and win screen
--make css compatible with phone browsers
+-improve lose and win screen
+-make css compatible with phone browsers <- needs to be tested
+-make hangman thiccer
 
-
--modify schema and create scores page
--reference pics
+-modify schema(maybe) and create scores page
+-reference pics/sources
 -improve edit profile page
+
 
 Low priority implementations:
 -make login page uncompulsory
+-Add a win animation using javascript animation functions
 
-Add a win animation using javascript animation functions
+

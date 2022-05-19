@@ -11,11 +11,14 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime, date
 import random
+import json
 
-user_date = (date.today().day + (date.today().month * 30)) % len(Words.query.all())
+user_date = (date.today().day + (date.today().month * 30)
+             ) % len(Words.query.all())
 answer = Words.query.get(user_date).word.upper()
 wordID = Words.query.filter_by(word=str(answer).capitalize()).first_or_404().id
 definition = Words.query.get(user_date).definition
+
 
 @app.route('/')
 @app.route('/hangman', methods=['Get', 'Post'])
@@ -104,23 +107,32 @@ def edit_profile():
         form.username.data = current_user.username
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
+
 @app.route('/processUserInfo/<string:userInfo>', methods=['POST'])
 def processUserInfo(userInfo):
     userInfo = json.loads(userInfo)
     score = userInfo.get('guesses') + userInfo.get('mistakes')
-    s = Scores(number_of_guesses=score, user_id=current_user.id, word_id=wordID)
+    s = Scores(number_of_guesses=score,
+               user_id=current_user.id, word_id=wordID)
     if current_user.id != 1:
         db.session.add(s)
         db.session.commit()
     return str(current_user.id)
 
+
 @app.route('/leaderboard', methods=['GET', 'POST'])
 def leaderboard():
     return render_template('leaderboard.html')
 
+
 @app.route('/wotd', methods=['GET'])
 @login_required
 def wotd():
-    return render_template('wotd.html', word=answer.capitalize(), 
-    score=Scores.query.filter_by(user_id=current_user.id, word_id=wordID).first_or_404().number_of_guesses,
-    definition=definition)
+    dict = {}
+    for score in Scores.query.filter_by(user_id=current_user.id).all():
+        dict[f"{Words.query.get(score.word_id).word}"] = f"{score.number_of_guesses}"
+
+    return render_template('wotd.html', word=answer.capitalize(),
+                           score=Scores.query.filter_by(
+                               user_id=current_user.id, word_id=wordID).first_or_404().number_of_guesses,
+                           definition=definition, dict=dict)
