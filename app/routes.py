@@ -9,9 +9,11 @@ from app.models import Scores, User, Words
 from app.forms import RegistrationForm, LoginForm, EditProfileForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from werkzeug.utils import secure_filename
 from datetime import datetime, date
 import random
 import json
+import os
 
 user_date = (date.today().day + (date.today().month * 30)
              ) % len(Words.query.all())
@@ -119,13 +121,18 @@ def processUserInfo(userInfo):
         db.session.commit()
     return str(current_user.id)
 
+# renders the leaderboard html page and
+
 
 @app.route('/leaderboard', methods=['GET', 'POST'])
 def leaderboard():
-    dict = []
+    player_scores = []
     for score in Scores.query.all():
-        dict.append([User.query.get(score.user_id).username, score.number_of_guesses, Words.query.get(score.word_id).word]) 
-    return render_template('leaderboard.html', user_score=dict)
+        player_scores.append([User.query.get(score.user_id).username,
+                             score.number_of_guesses, Words.query.get(score.word_id).word])
+    return render_template('leaderboard.html', user_score=player_scores)
+
+# renders word of the day html page and loads in the users score, definition, and their previous scores
 
 
 @app.route('/wotd', methods=['GET'])

@@ -96,3 +96,7 @@ button:disabled {
   position: relative;
   left: 46%;
 }
+
+.scores {
+  border: 5px double darkmagenta; padding: 5px;
+}

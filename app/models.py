@@ -1,10 +1,15 @@
 import email
 from datetime import datetime
+
+from sqlalchemy import null
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 import random
+from flask import request
+
+
 
 
 
@@ -49,7 +54,6 @@ class Scores(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     word_id = db.Column(db.Integer, db.ForeignKey('words.id'), nullable=False)
     
-
     def __repr__(self):
         return '<Scores {}>'.format(self.number_of_guesses)
 
