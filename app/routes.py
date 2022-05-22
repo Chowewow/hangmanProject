@@ -20,6 +20,7 @@ answer = Words.query.get(user_date).word.upper()
 wordID = Words.query.filter_by(word=str(answer).capitalize()).first_or_404().id
 definition = Words.query.get(user_date).definition
 
+
 @app.route('/')
 @app.route('/hangman', methods=['Get', 'Post'])
 @login_required
@@ -29,6 +30,8 @@ def hangman():
     return render_template('Hangman.html', title='Home', answer=answer, definition=definition)
 
 # @loginrequired
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -46,10 +49,12 @@ def login():
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('hangman'))
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -65,6 +70,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+
 @app.route('/guest', methods=['GET', 'POST'])
 def guest():
     user = User.query.filter_by(username='guest').first()
@@ -75,6 +81,7 @@ def guest():
         next_page = url_for('hangman')
     return redirect(next_page)
 
+
 @app.route('/user/<username>')
 @login_required
 def user(username):
@@ -84,11 +91,13 @@ def user(username):
         dict[f"{Words.query.get(score.word_id).word}"] = f"{score.number_of_guesses}"
     return render_template('user.html', user=user, dict=dict)
 
+
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -103,11 +112,12 @@ def edit_profile():
         form.username.data = current_user.username
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
+
 @app.route('/processUserInfo/<string:userInfo>', methods=['POST'])
 def processUserInfo(userInfo):
     userInfo = json.loads(userInfo)
     score = userInfo.get('guesses') + userInfo.get('mistakes')
-    s = Scores(number_of_guesses=score, user_id=current_user.id, 
+    s = Scores(number_of_guesses=score, user_id=current_user.id,
                word_id=wordID, difficulty=userInfo.get('difficulty'))
     if current_user.id != 1:
         db.session.add(s)
@@ -115,19 +125,24 @@ def processUserInfo(userInfo):
     return str(current_user.id)
 
 # renders the scoreboard html page and
+
+
 @app.route('/scoreboard', methods=['GET', 'POST'])
 @login_required
 def scoreboard():
-    if Scores.query.filter_by(user_id=current_user.id, word_id=wordID) == None:
+    if len(Scores.query.filter_by(user_id=current_user.id, word_id=wordID).all()) == 0:
         return redirect(url_for('notAnswered'))
     player_scores = []
     for score in Scores.query.all():
-        player_scores.append([User.query.get(score.user_id).username, score.number_of_guesses, 
-                              Words.query.get(score.word_id).word, score.difficulty,
+        player_scores.append([User.query.get(score.user_id).username, score.number_of_guesses,
+                              Words.query.get(
+                                  score.word_id).word, score.difficulty,
                               score.recorded])
     return render_template('scoreboard.html', user_score=player_scores)
 
 # renders word of the day html page and loads in the users score, definition, and their previous scores
+
+
 @app.route('/wotd', methods=['GET'])
 @login_required
 def wotd():
@@ -135,3 +150,9 @@ def wotd():
                            score=Scores.query.filter_by(
                                user_id=current_user.id, word_id=wordID).first_or_404().number_of_guesses,
                            definition=definition, dict=dict)
+
+
+@app.route('/notAnswered', methods=['GET', 'POST'])
+@login_required
+def notAnswered():
+    return render_template('notAnswered.html')

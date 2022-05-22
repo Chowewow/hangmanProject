@@ -1,11 +1,11 @@
 body {
   background-color: rgb(25, 19, 29);
   color: antiquewhite;
-  font-family: Garamond, serif; 
+  font-family: cursive, Garamond, serif; 
   font-size: large;
 }
 
-.slides, #wotd {
+.slides, #wotd, #notAnswered {
   text-align: center;
 }
 
