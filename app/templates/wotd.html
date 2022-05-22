@@ -2,10 +2,8 @@
 {% block content %}
 <div id="wotd">
     The word of the day was: <br><br><strong style="font-size: xx-large;">{{ word }}</strong> <br> {{definition}} <br><br>
-    
-    You guessed it in {{ score }} guess(es)
+    <p id="wotdMsg">You guessed it in {{ score }} guess(es)</p>
     <br><br>
-
 </div>
 
 {% endblock %}

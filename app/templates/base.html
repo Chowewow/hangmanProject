@@ -14,11 +14,10 @@
     <!-- Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-
 </head>
 
 <body>
+    <!-- nav bar -->
     <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url_for('hangman') }}">Hangman</a>
@@ -29,11 +28,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                     <li class="nav-item">
                         <a class="nav-link" id="rules" style="cursor: pointer;">Rules</a>
                     </li>
-
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('scoreboard') }}">Scoreboard</a>
@@ -48,15 +45,13 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-
                     </li>
                     {% endif %}
                 </ul>
-
             </div>
         </div>
     </nav>
-
+    <!-- about/rules -->
     <div class="about" id="about">
         <div style="text-align: left; font-size: xx-large;">
             <span id="xBox" style="cursor: pointer;" aria-hidden="true">&nbsp; &times;</span>
@@ -78,11 +73,9 @@
             <p id="answer" style="display: none;">{{answer}}</p>
         </div>
     </div>
+
     {%block content%}
     {%endblock%}
-
-
-
 
     <hr>
     {% with messages = get_flashed_messages() %}
@@ -107,8 +100,6 @@
     <!--Hangman JS-->
     <script src="{{url_for('static', filename='Hangman.js')}}"></script>
 </body>
-
-
 <link rel="stylesheet" href="{{url_for('static', filename='Hangman.css')}} ">
 
 </html>

@@ -46,7 +46,7 @@ class User(UserMixin, db.Model):
         return 'https://www.gravatar.com/avatar/{}?d=retro&s={}'.format(digest,size)
 
 class Scores(db.Model):
-
+    
     id = db.Column(db.Integer, primary_key=True)
     number_of_guesses = db.Column(db.Integer)
     recorded = db.Column(db.Date, index=True, default=date.today())
@@ -56,7 +56,6 @@ class Scores(db.Model):
 
     def __repr__(self):
         return '<Scores {}>'.format(self.number_of_guesses)
-
 
 @login.user_loader
 def load_user(id):
