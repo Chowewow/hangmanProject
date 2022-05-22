@@ -11,7 +11,7 @@
     </tr>
     {% for item, item2, item3, item4, item5 in user_score %}
     <tr>
-        <td class="scores">{{ item }}</td>
+        <td class="scores" ><a href="/user/{{ item }}">{{ item }}</a></td>
         <td class="scores" style="text-align: center;">{{ item2 }}</td>
         <td class="scores" style="text-align: center;">{{ item3 }}</td>
         <td class="scores" style="text-align: center;">{{ item4 }}</td>
