@@ -128,7 +128,10 @@ def processUserInfo(userInfo):
 
 
 @app.route('/scoreboard', methods=['GET', 'POST'])
+@login_required
 def scoreboard():
+    if Scores.query.filter_by(user_id=current_user.id, word_id=wordID) == None:
+        return redirect(url_for('notAnswered'))
     player_scores = []
     for score in Scores.query.all():
         player_scores.append([User.query.get(score.user_id).username, score.number_of_guesses, 
@@ -143,7 +146,6 @@ def scoreboard():
 @login_required
 def wotd():
     
-
     return render_template('wotd.html', word=answer.capitalize(),
                            score=Scores.query.filter_by(
                                user_id=current_user.id, word_id=wordID).first_or_404().number_of_guesses,
