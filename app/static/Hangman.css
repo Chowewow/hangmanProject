@@ -1,9 +1,8 @@
 body {
   background-color: rgb(25, 19, 29);
   color: antiquewhite;
-  font-family: cursive, 'Times New Roman', Times, serif, Georgia; 
+  font-family: Garamond, serif; 
   font-size: large;
-  
 }
 
 .slides, #wotd {
@@ -14,9 +13,9 @@ body {
   background-color: rgb(206, 206, 206);
   border-radius: 5px;
   outline: rgb(66, 66, 66) outset 10px;
-  margin: 10px;
-  width: 50%;
-  height: 400px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+
 }
 
 button, #guessedWord {
@@ -40,7 +39,6 @@ button:disabled {
   color: rgb(206, 206, 206);
 }
 
-/* condense about and losescreen into one*/
 #about{
   display: none;
   z-index: 2;
@@ -58,14 +56,12 @@ button:disabled {
   border-style: solid;
 }
 
-
-#loseScreen {
+#endScreen {
   display: none;
   z-index: 2;
   top: 25%;
-  left: 40%;
-  width: 20%;
-  height: 10%;
+  width: 180px;
+  height: 150px;
   position: absolute;
   background-color: rgb(20, 20, 20);
   color: rgb(206, 206, 206);
@@ -94,11 +90,12 @@ button:disabled {
 #stats{
   border: 2px groove whitesmoke;
   position: relative;
-
+  margin:5px;
 }
 
 .scores {
-  border: 5px double darkmagenta; 
+  border: 5px double rgb(66, 66, 66); 
+  background-color: rgb(20, 20, 20);
   padding: 5px;
 }
 

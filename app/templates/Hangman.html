@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- main game -->
 <div class="slides" id="home">
-  <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
+  <canvas id="theGallows" width="400" height="400"></canvas><br>
   <span id="score">Guesses: 0 Mistakes: 0</span>
   <p id="definition">Definition: {{ definition }}</p>
   <p id="blankSpaces"></p>
@@ -13,13 +14,14 @@
   </form>
   <button id="difficulty" onclick="changeDifficulty()">Difficulty: Normal</button>
 </div>
-
-<div class="loseScreen" id="loseScreen">
-  <div>
-    <h3>You Lose</h3>
-    <button id="playAgain">Stats</button>
+<!-- end screen -->
+<div style="display: flex; justify-content: center;">
+  <div class="endScreen" id="endScreen">  
+   <div style="margin:5px">
+     <h3 id="endMsg">You Lose</h3>
+     <button id="continue">Continue</button>
+      <p>Thanks for playing!<br>Come back tomorrow</p>
+    </div>
   </div>
 </div>
-
-
 {% endblock %}

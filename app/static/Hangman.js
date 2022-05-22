@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function () { //initiates buttons
   let count = 0;
   while (count < 26){
     let letter = String.fromCharCode(65 + count)
@@ -8,7 +8,6 @@ $(document).ready(function () {
     });
     count++;
   }
-
   $("#xBox").click(() =>  {
     $("#about").hide();
   });
@@ -18,18 +17,16 @@ $(document).ready(function () {
   $("#guessButton").click(() => {
     guessWord($("#guessedWord").val());
   });
-  $("#guessedWord").on("keydown", function (event) {
+  $("#guessedWord").on("keydown", function (event) { //prevents refresh on enter
     if (event.keyCode == 13) {
       guessWord($("#guessedWord").val());
       event.preventDefault();
     }
   });
-  $("#playAgain").on("click", () => {
+  $("#continue").on("click", () => {
     location.reload();
   });
-
 });
-
 
 let answer = $("#answer").text();
 let guesses = 0;
@@ -37,7 +34,6 @@ let mistakes = 0;
 let guessedLetters = [];
 let correctGuesses = 0;
 let hardMode = false;
-
 
 //outputs blank spaces or correctly guessed letters in position
 function output() {
@@ -56,7 +52,8 @@ function output() {
     if (correctGuesses == answer.length) {
       disableLetters();
       sendUserInfo();
-      alert("you win!");
+      $("#endMsg").text("You Win!");
+      $("#endScreen").show();
     }
   }
   document.getElementById("blankSpaces").innerText = format;
@@ -67,36 +64,26 @@ output(); //initates blank spaces
 function guessLetter(letter) {
   document.getElementById("letter" + letter).disabled = true;
   guessedLetters.push(letter);
-  if (answer.includes(letter) && hardMode) {
+  if (answer.includes(letter)) {
     guesses++;
     output();
-    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
-  } else if(answer.includes(letter) && !hardMode){
-    guesses++;
-    output();
-    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
-  } else if (!answer.includes(letter) && hardMode) {
-    mistakes ++;
-    updateCanvas(mistakes);
-    mistakes++;
-    updateCanvas(mistakes);
-    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
-  } else if (!answer.includes(letter) && !hardMode){
-    mistakes++;
-    updateCanvas(mistakes);
-    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
-  }
+    if (hardMode) {
+      $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
+    } else {
+      $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
+    }
+  } else {updateScore()}
 }
 
 //disables all input buttons
 function disableLetters() {
   document.getElementById("guessButton").disabled = true;
+  document.getElementById("guessedWord").disabled = true;
   let chr = "A";
   for (let i = 0; i < 26; i++) {
     chr = String.fromCharCode(65 + i);
     document.getElementById("letter" + chr).disabled = true;
   }
-  document.getElementById("guessedWord").disabled = true;
 }
 
 //checks if guess is alphabetic and correct otherwise update mistakes
@@ -106,23 +93,28 @@ function guessWord(word) {
       guesses++;
       disableLetters();
       sendUserInfo();
-      alert("you win!");
-    } else {
-      mistakes++;
-      updateCanvas(mistakes);
-      $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
-      if (hardMode) {
-        mistakes++;
-        updateCanvas(mistakes);
-        $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
-      }
-    }
-    
+      $("#endMsg").text("You Win!");
+      $("#endScreen").show();
+    } else {updateScore()}
   } else {
     alert("Alphabetical Characters Only")
   }
 }
 
+//updates score and canvas depending on difficulty
+function updateScore() {
+  mistakes++;
+  updateCanvas(mistakes);
+  if (hardMode) {
+    mistakes++;
+    updateCanvas(mistakes);
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes/2}</span>`);
+  } else {
+    $("#score").html(`Guesses:  ${guesses}\nMistakes: <span style="color: red;">${mistakes}</span>`);
+  }
+}
+
+//changes between hard & normal mode
 function changeDifficulty() {
   if (hardMode && (guesses == 0 && mistakes == 0)) {
     document.getElementById("difficulty").innerHTML = "Difficulty: Normal";
@@ -137,65 +129,66 @@ function changeDifficulty() {
 
 let canvas = document.getElementById("theGallows");
 let ctx = canvas.getContext("2d");
-//draws next part on canvas depending on mistakes made (lines get darker for some reason?)
+//draws next part on canvas depending on mistakes made ends game when mistakes=10
 function updateCanvas(mistakes) {
   ctx.lineWidth = 4;
   switch (mistakes) {
     case 1:
-      ctx.moveTo(100, 350);
-      ctx.lineTo(500, 350);
+      ctx.moveTo(50, 350);
+      ctx.lineTo(350, 350);
       break;
     case 2:
-      ctx.moveTo(400, 350);
-      ctx.lineTo(400, 50);
+      ctx.moveTo(300, 350);
+      ctx.lineTo(300, 50);
       break;
     case 3:
-      ctx.moveTo(402, 50);
-      ctx.lineTo(248, 50);
+      ctx.moveTo(302, 50);
+      ctx.lineTo(148, 50);
       break;
     case 4:
-      ctx.moveTo(250, 50);
-      ctx.lineTo(250, 100);
+      ctx.moveTo(150, 50);
+      ctx.lineTo(150, 100);
       break;
     case 5:
       ctx.beginPath();
-      ctx.arc(250, 120, 20, 0, 2 * Math.PI);
+      ctx.arc(150, 120, 20, 0, 2 * Math.PI);
       break;
     case 6:
-      ctx.moveTo(250, 140);
-      ctx.lineTo(250, 250);
+      ctx.moveTo(150, 140);
+      ctx.lineTo(150, 250);
       break;
     case 7:
-      ctx.moveTo(250, 160);
-      ctx.lineTo(200, 210);
+      ctx.moveTo(150, 160);
+      ctx.lineTo(100, 210);
       break;
     case 8:
-      ctx.moveTo(250, 160);
-      ctx.lineTo(300, 210);
+      ctx.moveTo(150, 160);
+      ctx.lineTo(200, 210);
       break;
     case 9:
-      ctx.moveTo(250, 250);
-      ctx.lineTo(200, 300);
+      ctx.moveTo(150, 250);
+      ctx.lineTo(100, 300);
       break;
     case 10:
-      ctx.moveTo(250, 250);
-      ctx.lineTo(300, 300);
-      ctx.moveTo(240, 110);
-      ctx.lineTo(260, 120);
-      ctx.moveTo(240, 120);
-      ctx.lineTo(260, 110);
+      ctx.moveTo(150, 250);
+      ctx.lineTo(200, 300);
+      ctx.moveTo(140, 110);
+      ctx.lineTo(160, 120);
+      ctx.moveTo(140, 120);
+      ctx.lineTo(160, 110);
       ctx.stroke();
       ctx.beginPath();
-      ctx.arc(250, 135, 10, Math.PI, 0);
+      ctx.arc(150, 135, 10, Math.PI, 0);
   }
   ctx.stroke();
   if (mistakes == 10) {
     disableLetters();
     sendUserInfo();
-    $("#loseScreen").show();
+    $("#endScreen").show();
+    $("#wotdMsg").text("You failed today's puzzle") //doesnt work atm
   }
 }
-
+//sends user score to db
 function sendUserInfo() {
   if (hardMode) {
     var difficulty = "Hard"
