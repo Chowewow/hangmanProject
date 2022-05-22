@@ -1,5 +1,5 @@
 import email
-from datetime import datetime
+from datetime import datetime, date
 
 from sqlalchemy import null
 from app import db, login
@@ -8,7 +8,6 @@ from flask_login import UserMixin
 from hashlib import md5
 import random
 from flask import request
-
 
 
 
@@ -50,10 +49,11 @@ class Scores(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     number_of_guesses = db.Column(db.Integer)
-    recorded = db.Column(db.Date, index=True, default=datetime.utcnow)
+    recorded = db.Column(db.Date, index=True, default=date.today())
+    difficulty = db.Column(db.String(10))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     word_id = db.Column(db.Integer, db.ForeignKey('words.id'), nullable=False)
-    
+
     def __repr__(self):
         return '<Scores {}>'.format(self.number_of_guesses)
 

@@ -1,10 +1,10 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{%block content %}
+{% block content %}
 <div class="slides" id="home">
   <canvas id="theGallows" width="600" height="400" style="border: 1px solid;"></canvas><br>
   <span id="score">Guesses: 0 Mistakes: 0</span>
-  <p id="definition">Definition: {{definition}}</p>
+  <p id="definition">Definition: {{ definition }}</p>
   <p id="blankSpaces"></p>
   <form id="keys">
     <input type="text" id="guessedWord">
@@ -22,4 +22,4 @@
 </div>
 
 
-{%endblock%}
+{% endblock %}

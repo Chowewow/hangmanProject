@@ -139,6 +139,7 @@ let canvas = document.getElementById("theGallows");
 let ctx = canvas.getContext("2d");
 //draws next part on canvas depending on mistakes made (lines get darker for some reason?)
 function updateCanvas(mistakes) {
+  ctx.lineWidth = 4;
   switch (mistakes) {
     case 1:
       ctx.moveTo(100, 350);
@@ -149,8 +150,8 @@ function updateCanvas(mistakes) {
       ctx.lineTo(400, 50);
       break;
     case 3:
-      ctx.moveTo(400, 50);
-      ctx.lineTo(250, 50);
+      ctx.moveTo(402, 50);
+      ctx.lineTo(248, 50);
       break;
     case 4:
       ctx.moveTo(250, 50);
@@ -196,16 +197,22 @@ function updateCanvas(mistakes) {
 }
 
 function sendUserInfo() {
-  if (hardMode){
-    //send
-    mistakes = mistakes;
-  }
-
-  let userInfo = {
-    'guesses': guesses, 
-    'mistakes': mistakes/2, 
-    'word': answer,
-
+  if (hardMode) {
+    var difficulty = "Hard"
+    var userInfo = {
+      'guesses': guesses, 
+      'mistakes': mistakes/2, 
+      'word': answer,
+      'difficulty': difficulty,
+    }
+  } else {
+    var difficulty = "Normal"
+    var userInfo = {
+      'guesses': guesses, 
+      'mistakes': mistakes, 
+      'word': answer,
+      'difficulty': difficulty,
+    }
   }
   const request = new XMLHttpRequest()
   request.open('POST', `/processUserInfo/${JSON.stringify(userInfo)}`)

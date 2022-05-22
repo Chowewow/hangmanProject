@@ -98,5 +98,10 @@ button:disabled {
 }
 
 .scores {
-  border: 5px double darkmagenta; padding: 5px;
+  border: 5px double darkmagenta; 
+  padding: 5px;
+}
+
+#profilePic {
+  border: 5px ridge rgb(66, 66, 66);
 }

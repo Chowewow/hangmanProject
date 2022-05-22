@@ -1,4 +1,4 @@
-from crypt import methods
+
 import json
 import re
 from turtle import title
@@ -117,8 +117,8 @@ def edit_profile():
 def processUserInfo(userInfo):
     userInfo = json.loads(userInfo)
     score = userInfo.get('guesses') + userInfo.get('mistakes')
-    s = Scores(number_of_guesses=score,
-               user_id=current_user.id, word_id=wordID)
+    s = Scores(number_of_guesses=score, user_id=current_user.id, 
+               word_id=wordID, difficulty=userInfo.get('difficulty'))
     if current_user.id != 1:
         db.session.add(s)
         db.session.commit()
@@ -131,8 +131,9 @@ def processUserInfo(userInfo):
 def scoreboard():
     player_scores = []
     for score in Scores.query.all():
-        player_scores.append([User.query.get(score.user_id).username,
-                             score.number_of_guesses, Words.query.get(score.word_id).word])
+        player_scores.append([User.query.get(score.user_id).username, score.number_of_guesses, 
+                              Words.query.get(score.word_id).word, score.difficulty,
+                              score.recorded])
     return render_template('scoreboard.html', user_score=player_scores)
 
 # renders word of the day html page and loads in the users score, definition, and their previous scores
