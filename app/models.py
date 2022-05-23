@@ -48,7 +48,7 @@ class User(UserMixin, db.Model):
 class Scores(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
-    number_of_guesses = db.Column(db.Integer)
+    points = db.Column(db.Integer)
     recorded = db.Column(db.Date, index=True, default=date.today())
     difficulty = db.Column(db.String(10))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

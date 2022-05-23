@@ -34,6 +34,7 @@ let mistakes = 0;
 let guessedLetters = [];
 let correctGuesses = 0;
 let hardMode = false;
+let points = 0;
 
 //outputs blank spaces or correctly guessed letters in position
 function output() {
@@ -188,8 +189,14 @@ function updateCanvas(mistakes) {
     $("#wotdMsg").text("You failed today's puzzle") //doesnt work atm
   }
 }
-//sends user score to db
+
+//calculates points & sends user score to db
 function sendUserInfo() {
+  if (mistakes==10) {
+    points = 0;
+  } else if (hardMode) {
+    points = 100 - ((guesses*4) + (mistakes*5));
+  } else {points = 100 - ((guesses*4) + (mistakes*10));}
   if (hardMode) {
     var difficulty = "Hard"
     var userInfo = {
@@ -197,6 +204,7 @@ function sendUserInfo() {
       'mistakes': mistakes/2, 
       'word': answer,
       'difficulty': difficulty,
+      'points': points,
     }
   } else {
     var difficulty = "Normal"
@@ -205,6 +213,7 @@ function sendUserInfo() {
       'mistakes': mistakes, 
       'word': answer,
       'difficulty': difficulty,
+      'points': points,
     }
   }
   const request = new XMLHttpRequest()

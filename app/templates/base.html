@@ -52,28 +52,28 @@
         </div>
     </nav>
     <!-- about/rules -->
-    <div class="about" id="about">
-        <div style="text-align: left; font-size: xx-large;">
-            <span id="xBox" style="cursor: pointer;" aria-hidden="true">&nbsp; &times;</span>
-        </div>
-        <div style="margin: 20px;">
-            <h1>About</h1>
-            <p>
-                We created this puzzle in the hopes that it would be a helpful tool in expanding the users vocabulary.
-                We thought hangman would be an entertaining and pragmatic way to do this.
-            </p>
-            <p>
-                The goal is to guess the word using the least amount of guesses as possible.
-                You are allowed 10 mistakes, at each guess you can guess a letter or the word and if the letter is in
-                the
-                word its position will be revealed.
-                If you lose all your guesses the man gets hanged.
-                Less guesses = a better score.
-            </p>
-            <p id="answer" style="display: none;">{{answer}}</p>
+    <div style="display: flex; justify-content: center;">
+        <div class="about" id="about">
+            <div style="text-align: left; font-size: xx-large;">
+                <span id="xBox" style="cursor: pointer; position:absolute" aria-hidden="true">&nbsp; &times;</span>
+            </div>
+            <div style="margin:20px">
+                <h1>About</h1>
+                <p>
+                    We created this puzzle in the hopes that it would be a helpful tool in expanding the users vocabulary.
+                    We thought hangman would be an entertaining and pragmatic way to do this.
+                </p>
+                <p>
+                    The goal is to guess the word using the least amount of guesses as possible.
+                    You are allowed 10 mistakes(5 in hard mode), at each guess you can guess a letter or the word 
+                    and if the letter is in the word its position will be revealed.
+                    If you make too many mistakes the man gets hanged.
+                    Less guesses = more points.
+                </p>
+                <p id="answer" style="display: none;">{{answer}}</p>
+            </div>
         </div>
     </div>
-
     {%block content%}
     {%endblock%}
 

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="wotd">
-    The word of the day was: <br><br><strong style="font-size: xx-large;">{{ word }}</strong> <br> {{definition}} <br><br>
-    <p id="wotdMsg">You guessed it in {{ score }} guess(es)</p>
+    <br>The word of the day was:<br><strong style="font-size: xx-large;">{{ word }}</strong>
+    <br>{{ definition }}<br><br>
+    <p id="wotdMsg">You scored {{ score }} points</p>
     <br><br>
 </div>
 
